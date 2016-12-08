@@ -6,6 +6,7 @@
  * @desc A snippet for separated by delimiters data output.
  * @note The fields formed by the mm_ddMultipleFields widget values ooutput gets more convinient with the snippet.
  * 
+ * @uses PHP >= 5.4.
  * @uses MODX >= 1.0.13.
  * @uses MODXEvo.library.ddTools >= 0.15.3.
  * @uses MODXEvo.snippet.ddTypograph >= 1.4.3 (if typography is required).
@@ -51,15 +52,15 @@ if (!file_exists($ddToolsPath)){
 require_once $ddToolsPath;
 
 //Для обратной совместимости
-extract(ddTools::verifyRenamedParams($params, array(
+extract(ddTools::verifyRenamedParams($params, [
 	'inputString' => 'string',
 	'inputString_docField' => 'docField',
 	'inputString_docId' => 'docId'
-)));
+]));
 
 //Если задано имя поля, которое необходимо получить
 if (isset($inputString_docField)){
-	$inputString = ddTools::getTemplateVarOutput(array($inputString_docField), $inputString_docId);
+	$inputString = ddTools::getTemplateVarOutput([$inputString_docField], $inputString_docId);
 	$inputString = $inputString[$inputString_docField];
 }
 
@@ -71,15 +72,15 @@ if (isset($inputString) && strlen($inputString) > 0){
 	if (!isset($colDelimiter)){$colDelimiter = '::';}
 	
 	//Являются ли разделители регулярками
-	$rowDelimiterIsRegexp = (filter_var($rowDelimiter, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^\/.*\/[a-z]*$/'))) !== false) ? true : false;
-	$colDelimiterIsRegexp = (filter_var($colDelimiter, FILTER_VALIDATE_REGEXP, array('options' => array('regexp' => '/^\/.*\/[a-z]*$/'))) !== false) ? true : false;
+	$rowDelimiterIsRegexp = (filter_var($rowDelimiter, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^\/.*\/[a-z]*$/']]) !== false) ? true : false;
+	$colDelimiterIsRegexp = (filter_var($colDelimiter, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^\/.*\/[a-z]*$/']]) !== false) ? true : false;
 	
 	//Если заданы условия фильтрации
 	if (isset($filter)){
 		//Разбиваем по условиям
 		$temp = explode('||', $filter);
 		
-		$filter = array();
+		$filter = [];
 		
 		foreach ($temp as $value){
 			//Разбиваем по колонке/значению
@@ -93,7 +94,7 @@ if (isset($inputString) && strlen($inputString) > 0){
 			
 			//Если ни одно правило для этой колонки ещй не задано
 			if (!isset($filter[$value[0]])){
-				$filter[$value[0]] = array();
+				$filter[$value[0]] = [];
 			}
 			
 			//Добавляем правило для соответствующей колонки
@@ -223,7 +224,7 @@ if (isset($inputString) && strlen($inputString) > 0){
 				foreach ($typography as $v){
 					//Если такая колонка существует, типографируем
 					if (isset($data[$rowNumber][$v])){
-						$data[$rowNumber][$v] = $modx->runSnippet('ddTypograph', array('text' => $data[$rowNumber][$v]));
+						$data[$rowNumber][$v] = $modx->runSnippet('ddTypograph', ['text' => $data[$rowNumber][$v]]);
 					}
 				}
 			}
@@ -233,7 +234,7 @@ if (isset($inputString) && strlen($inputString) > 0){
 		if ($outputFormat == 'array'){
 			$result = $data;
 		}else{
-			$resTemp = array();
+			$resTemp = [];
 			
 			//Дополнительные данные
 			if (
@@ -252,7 +253,7 @@ if (isset($inputString) && strlen($inputString) > 0){
 					$modx->logEvent(1, 2, '<p>String separated by “::” && “||” in the “placeholders” parameter is deprecated. Use a <a href="https://en.wikipedia.org/wiki/Query_string)">query string</a>.</p><p>The snippet has been called in the document with id '.$modx->documentIdentifier.'.</p>', $modx->currentSnippet);
 				}
 			}else{
-				$placeholders = array();
+				$placeholders = [];
 			}
 			
 			//Если вывод просто в формате html
@@ -286,14 +287,14 @@ if (isset($inputString) && strlen($inputString) > 0){
 					
 					//Перебираем строки
 					foreach ($data as $rowNumber => $row){
-						$resTemp[$rowNumber] = array(
+						$resTemp[$rowNumber] = [
 							//Запишем номер строки
 							'rowNumber.zeroBased' => $rowNumber,
 							'rowNumber' => $rowNumber + 1,
 							//И общее количество элементов
 							'total' => $total,
 							'resultTotal' => $resultTotal
-						);
+						];
 						
 						//Перебираем колонки
 						foreach ($row as $columnNumber => $column){
@@ -309,11 +310,11 @@ if (isset($inputString) && strlen($inputString) > 0){
 									$colTpl !== false &&
 									strlen($colTpl[$columnNumber]) > 0
 								){
-									$resTemp[$rowNumber]['col'.$columnNumber] = $modx->parseText($colTpl[$columnNumber], array_merge(array(
+									$resTemp[$rowNumber]['col'.$columnNumber] = $modx->parseText($colTpl[$columnNumber], array_merge([
 										'val' => $column,
 										'rowNumber.zeroBased' => $resTemp[$rowNumber]['rowNumber.zeroBased'],
 										'rowNumber' => $resTemp[$rowNumber]['rowNumber']
-									), $placeholders));
+									], $placeholders));
 								}else{
 									$resTemp[$rowNumber]['col'.$columnNumber] = $column;
 								}
@@ -333,11 +334,11 @@ if (isset($inputString) && strlen($inputString) > 0){
 								){
 									unset($row[$columnNumber]);
 								}else if (strlen($colTpl[$columnNumber]) > 0){
-									$row[$columnNumber] = $modx->parseText($colTpl[$columnNumber], array_merge(array(
+									$row[$columnNumber] = $modx->parseText($colTpl[$columnNumber], array_merge([
 										'val' => $column,
 										'rowNumber.zeroBased' => $rowNumber,
 										'rowNumber' => $rowNumber + 1
-									), $placeholders));
+									], $placeholders));
 								}
 							}
 						}
@@ -370,7 +371,7 @@ if (isset($inputString) && strlen($inputString) > 0){
 				}
 				
 				//Это чтобы модекс не воспринимал как вызов сниппета
-				$result = strtr($result, array('[[' => '[ [', ']]' => '] ]'));
+				$result = strtr($result, ['[[' => '[ [', ']]' => '] ]']);
 			}
 			
 			//Если оборачивающий шаблон задан (и вывод не в массив), парсим его
@@ -378,7 +379,7 @@ if (isset($inputString) && strlen($inputString) > 0){
 				//Chunk content or inline template
 				$outerTpl = (substr($outerTpl, 0, 6) == '@CODE:') ? substr($outerTpl, 6) : $modx->getChunk($outerTpl);
 				
-				$resTemp = array();
+				$resTemp = [];
 				
 				//Элемент массива 'result' должен находиться самым первым, иначе дополнительные переданные плэйсхолдеры в тексте не найдутся! 
 				$resTemp['result'] = $result;
