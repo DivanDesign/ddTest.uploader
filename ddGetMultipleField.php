@@ -7,7 +7,7 @@
  * @note The fields formed by the mm_ddMultipleFields widget values ooutput gets more convinient with the snippet.
  * 
  * @uses PHP >= 5.4.
- * @uses MODX >= 1.0.13.
+ * @uses MODXEvo >= 1.1.
  * @uses MODXEvo.library.ddTools >= 0.18.
  * @uses MODXEvo.snippet.ddTypograph >= 1.4.3 (if typography is required).
  * 
@@ -264,7 +264,7 @@ if (
 					//Получим содержимое шаблонов
 					foreach ($colTpl as $colTpl_itemNumber => $colTpl_itemValue){
 						//Chunk content or inline template
-						$colTpl[$colTpl_itemNumber] = (substr($colTpl[$colTpl_itemNumber], 0, 6) == '@CODE:') ? substr($colTpl[$colTpl_itemNumber], 6) : $modx->getChunk($colTpl[$colTpl_itemNumber]);
+						$colTpl[$colTpl_itemNumber] = $modx->getTpl($colTpl[$colTpl_itemNumber]);
 					}
 					
 					if (($temp = count($data[0]) - count($colTpl)) > 0){
@@ -278,7 +278,7 @@ if (
 				//Если задан шаблон строки
 				if (isset($rowTpl)){
 					//Chunk content or inline template
-					$rowTpl = (substr($rowTpl, 0, 6) == '@CODE:') ? substr($rowTpl, 6) : $modx->getChunk($rowTpl);
+					$rowTpl = $modx->getTpl($rowTpl);
 					
 					//Перебираем строки
 					foreach ($data as $rowNumber => $row){
@@ -372,7 +372,7 @@ if (
 			//Если оборачивающий шаблон задан (и вывод не в массив), парсим его
 			if (isset($outerTpl)){
 				//Chunk content or inline template
-				$outerTpl = (substr($outerTpl, 0, 6) == '@CODE:') ? substr($outerTpl, 6) : $modx->getChunk($outerTpl);
+				$outerTpl = $modx->getTpl($outerTpl);
 				
 				$resTemp = [];
 				
