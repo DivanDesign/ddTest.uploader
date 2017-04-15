@@ -67,7 +67,10 @@ if (isset($inputString_docField)){
 $result = '';
 
 //Если задано значение поля
-if (isset($inputString) && strlen($inputString) > 0){
+if (
+	isset($inputString) &&
+	strlen($inputString) > 0
+){
 	if (!isset($rowDelimiter)){$rowDelimiter = '||';}
 	if (!isset($colDelimiter)){$colDelimiter = '::';}
 	
