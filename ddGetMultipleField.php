@@ -3,19 +3,19 @@
  * ddGetMultipleField
  * @version 3.3 (2016-06-06)
  * 
- * @desc A snippet for separated by delimiters data output.
- * @note The fields formed by the mm_ddMultipleFields widget values ooutput gets more convinient with the snippet.
+ * @desc A snippet for processing, manipulations and custom output structured data (JSON or separated by delimiters strings).
+ * @note The fields formed by the “mm_ddMultipleFields” widget values output gets more convinient with the snippet.
  * 
  * @uses PHP >= 5.4.
  * @uses MODXEvo >= 1.1.
  * @uses MODXEvo.library.ddTools >= 0.18.
  * @uses MODXEvo.snippet.ddTypograph >= 1.4.3 (if typography is required).
  * 
- * @param $inputString {string_separated} — The input string containing separated values. @required
+ * @param $inputString {stirng_json|string_separated} — The input string containing values in JSON (https://en.wikipedia.org/wiki/JSON) or separated by “$rowDelimiter” and “$colDelimiter”. @required
  * @param $inputString_docField {string} — The name of the document field/TV which value is required to get. If the parameter is passed then the input string will be taken from the field/TV and “inputString” will be ignored. Default: —.
  * @param $inputString_docId {integer} — ID of the document which field/TV value is required to get. “inputString_docId” equals the current document id since “inputString_docId” is unset. Default: —.
- * @param $rowDelimiter {string|regexp} — The input string row delimiter. Default: '||'.
- * @param $colDelimiter {string|regexp} — The input string column delimiter. Default: '::'.
+ * @param $rowDelimiter {string|regexp} — The input string row delimiter (if not JSON). Default: '||'.
+ * @param $colDelimiter {string|regexp} — The input string column delimiter (if not JSON). Default: '::'.
  * @param $startRow {integer} — The index of the initial row (indexes start at 0). Default: 0.
  * @param $totalRows {integer|'all'} — The maximum number of rows to return. All rows will be returned if “totalRows” == 'all'. Default: 'all'.
  * @param $columns {string_commaSeparated|'all'} — The indexes of columns to return (indexes start at 0). All columns will be returned if “columns” == 'all'. Default: 'all'.
@@ -117,15 +117,29 @@ if (
 	$urlencode = (isset($urlencode) && $urlencode == '1') ? true : false;
 	$outputFormat = isset($outputFormat) ? strtolower($outputFormat) : 'html';
 	
-	//Разбиваем на строки
-	$data = $rowDelimiterIsRegexp ? preg_split($rowDelimiter, $inputString) : explode($rowDelimiter, $inputString);
+	//JSON
+	if (substr(ltrim($inputString), 0, 1) == '['){
+		try {
+			$data = json_decode($inputString, true);
+		}catch (\Exception $e){
+			//Flag
+			$data = [];
+		}
+	}
+	//Not JSON
+	if (empty($data)){
+		//Разбиваем на строки
+		$data = $rowDelimiterIsRegexp ? preg_split($rowDelimiter, $inputString) : explode($rowDelimiter, $inputString);
+	}
 	
 	//Общее количество строк
 	$total = count($data);
 	
 	//Перебираем строки, разбиваем на колонки
 	foreach ($data as $rowNumber => $row){
-		$data[$rowNumber] = $colDelimiterIsRegexp ? preg_split($colDelimiter, $row) : explode($colDelimiter, $row);
+		if (!is_array($row)){
+			$data[$rowNumber] = $colDelimiterIsRegexp ? preg_split($colDelimiter, $row) : explode($colDelimiter, $row);
+		}
 		
 		//Если необходимо получить какие-то конкретные значения
 		if ($filter !== false){
