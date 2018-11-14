@@ -1,7 +1,7 @@
 <?php
 /**
  * ddGetMultipleField
- * @version 3.3 (2016-06-06)
+ * @version 3.4 (2018-11-14)
  * 
  * @desc A snippet for processing, manipulations and custom output structured data (JSON or separated by delimiters strings).
  * @note The fields formed by the “mm_ddMultipleFields” widget values output gets more convinient with the snippet.
@@ -36,9 +36,9 @@
  * @param $totalRowsToPlaceholder {string} — The name of the global MODX placeholder that holds the total number of rows. The placeholder won't be set if “totalRowsToPlaceholder” is empty. Default: ''.
  * @param $resultToPlaceholder {string} — The name of the global MODX placeholder that holds the snippet result. The result will be returned in a regular manner if the parameter is empty. Default: ''.
  * 
- * @link http://code.divandesign.biz/modx/ddgetmultiplefield/3.3
+ * @link http://code.divandesign.biz/modx/ddgetmultiplefield/3.4
  * 
- * @copyright 2009–2016 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2009–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 $ddToolsPath = $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
