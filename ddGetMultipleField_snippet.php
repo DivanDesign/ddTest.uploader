@@ -11,11 +11,11 @@
  * @uses MODXEvo.libraries.ddTools >= 0.18.
  * @uses MODXEvo.snippets.ddTypograph >= 1.4.3 (if typography is required).
  * 
- * @param $inputString {stirng_json|string_separated} — The input string containing values in JSON (https://en.wikipedia.org/wiki/JSON) or separated by “$rowDelimiter” and “$colDelimiter”. @required
+ * @param $inputString {stirng_json|string_separated} — The input string containing values in JSON (https://en.wikipedia.org/wiki/JSON) or separated by “$inputString_rowDelimiter” and “$inputString_colDelimiter”. @required
  * @param $inputString_docField {string} — The name of the document field/TV which value is required to get. If the parameter is passed then the input string will be taken from the field/TV and “inputString” will be ignored. Default: —.
  * @param $inputString_docId {integer} — ID of the document which field/TV value is required to get. “inputString_docId” equals the current document id since “inputString_docId” is unset. Default: —.
- * @param $rowDelimiter {string|regexp} — The input string row delimiter (if not JSON). Default: '||'.
- * @param $colDelimiter {string|regexp} — The input string column delimiter (if not JSON). Default: '::'.
+ * @param $inputString_rowDelimiter {string|regexp} — The input string row delimiter (if not JSON). Default: '||'.
+ * @param $inputString_colDelimiter {string|regexp} — The input string column delimiter (if not JSON). Default: '::'.
  * @param $startRow {integer} — The index of the initial row (indexes start at 0). Default: 0.
  * @param $totalRows {integer|'all'} — The maximum number of rows to return. All rows will be returned if “totalRows” == 'all'. Default: 'all'.
  * @param $columns {string_commaSeparated|'all'} — The indexes of columns to return (indexes start at 0). All columns will be returned if “columns” == 'all'. Default: 'all'.
@@ -66,7 +66,9 @@ extract(ddTools::verifyRenamedParams(
 	[
 		'inputString' => 'string',
 		'inputString_docField' => 'docField',
-		'inputString_docId' => 'docId'
+		'inputString_docId' => 'docId',
+		'inputString_rowDelimiter' => 'rowDelimiter',
+		'inputString_colDelimiter' => 'colDelimiter'
 	]
 ));
 
@@ -86,18 +88,18 @@ if (
 	isset($inputString) &&
 	strlen($inputString) > 0
 ){
-	if (!isset($rowDelimiter)){$rowDelimiter = '||';}
-	if (!isset($colDelimiter)){$colDelimiter = '::';}
+	if (!isset($inputString_rowDelimiter)){$inputString_rowDelimiter = '||';}
+	if (!isset($inputString_colDelimiter)){$inputString_colDelimiter = '::';}
 	
 	//Являются ли разделители регулярками
-	$rowDelimiterIsRegexp = (filter_var(
-		$rowDelimiter,
+	$inputString_rowDelimiterIsRegexp = (filter_var(
+		$inputString_rowDelimiter,
 		FILTER_VALIDATE_REGEXP,
 		['options' => ['regexp' => '/^\/.*\/[a-z]*$/']]
 	) !== false) ? true : false;
 	
-	$colDelimiterIsRegexp = (filter_var(
-		$colDelimiter,
+	$inputString_colDelimiterIsRegexp = (filter_var(
+		$inputString_colDelimiter,
 		FILTER_VALIDATE_REGEXP,
 		['options' => ['regexp' => '/^\/.*\/[a-z]*$/']]
 	) !== false) ? true : false;
@@ -183,11 +185,11 @@ if (
 	//Not JSON
 	if (empty($data)){
 		//Разбиваем на строки
-		$data = $rowDelimiterIsRegexp ? preg_split(
-			$rowDelimiter,
+		$data = $inputString_rowDelimiterIsRegexp ? preg_split(
+			$inputString_rowDelimiter,
 			$inputString
 		) : explode(
-			$rowDelimiter,
+			$inputString_rowDelimiter,
 			$inputString
 		);
 	}
@@ -201,11 +203,11 @@ if (
 		$rowNumber => $row
 	){
 		if (!is_array($row)){
-			$data[$rowNumber] = $colDelimiterIsRegexp ? preg_split(
-				$colDelimiter,
+			$data[$rowNumber] = $inputString_colDelimiterIsRegexp ? preg_split(
+				$inputString_colDelimiter,
 				$row
 			) : explode(
-				$colDelimiter,
+				$inputString_colDelimiter,
 				$row
 			);
 		}
