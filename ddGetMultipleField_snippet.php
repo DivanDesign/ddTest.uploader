@@ -106,7 +106,7 @@ if (
 	
 	//Если заданы условия фильтрации
 	if (isset($filter)){
-		//Разбиваем по условиям
+		//Разбиваем по условию или
 		$temp = explode(
 			'||',
 			$filter
@@ -114,26 +114,29 @@ if (
 		
 		$filter = [];
 		
-		foreach ($temp as $value){
-			//Разбиваем по колонке/значению
-			$value = explode(
-				'::',
-				$value
+		//Перебираем по условию или
+		foreach (
+			$temp as 
+			$orKey => $orValue
+		){
+			//Разбиваем по условию и
+			$and_array = explode(
+				'&&',
+				$orValue
 			);
-			
-			//Если указали просто значение (значит, это нулевая колонка) TODO: Удалить через пару версий.
-			if (count($value) < 2){
-				$value[1] = $value[0];
-				$value[0] = '0';
+			//Перебираем по условию и
+			foreach (
+				$and_array as 
+				$andKey => $andValue
+			){
+				//Разбиваем по колонке/значению
+				$value = explode(
+					'::',
+					$andValue
+				);
+				//Добавляем правило для соответствующей колонки
+				$filter[$orKey][$andKey][$value[0]] = $value[1];
 			}
-			
-			//Если ни одно правило для этой колонки ещй не задано
-			if (!isset($filter[$value[0]])){
-				$filter[$value[0]] = [];
-			}
-			
-			//Добавляем правило для соответствующей колонки
-			$filter[$value[0]][] = $value[1];
 		}
 	}else{
 		$filter = false;
