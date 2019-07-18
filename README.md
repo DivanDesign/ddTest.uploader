@@ -1,4 +1,4 @@
-# (MODX)EvolutionCMS.snippets.ddGetMultipleField
+## (MODX)EvolutionCMS.snippets.ddGetMultipleField
 
 A snippet for processing, manipulations and custom output structured data (JSON or separated by delimiters strings).
 ___
