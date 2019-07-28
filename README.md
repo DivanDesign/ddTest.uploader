@@ -6,9 +6,9 @@ Published: 27-12-2018
 
 Tags: Manager
 
-File: [https://code.divandesign.biz/api/download?id=501](https://code.divandesign.biz/api/download?id=501)
+File: [https://code.divandesign.biz/files/MODX/Uploader/ddTest.Uploader-3.4.zip](https://code.divandesign.biz/files/MODX/Uploader/ddTest.Uploader-3.4.zip)
 
-Link: [http://code.divandesign.biz/modx/ddgetmultiplefield/3.4](http://code.divandesign.biz/modx/ddgetmultiplefield/3.4)
+Link: [https://code.divandesign.biz/modx/Uploader/3.4](http://code.divandesign.biz/modx/Uploader/3.4)
 
 ## Description 
 
@@ -41,7 +41,8 @@ Snippet for outputting data separated by defined delimiters. It is convenient to
 
 ## Screenshots
 
-![image](image.png)
+* ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen1.png)
+* ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen2.png)
 
 ## Changelog
 

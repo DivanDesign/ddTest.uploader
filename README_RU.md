@@ -6,9 +6,9 @@
 
 Метки: Manager
 
-Файл: [https://code.divandesign.biz/api/download?id=501](https://code.divandesign.biz/api/download?id=501)
+Файл: [https://code.divandesign.biz/files/MODX/Uploader/ddTest.Uploader-3.4.zip](https://code.divandesign.biz/files/MODX/Uploader/ddTest.Uploader-3.4.zip)
 
-Ссылка: [http://code.divandesign.biz/modx/ddgetmultiplefield/3.4](http://code.divandesign.biz/modx/ddgetmultiplefield/3.4)
+Ссылка: [https://code.divandesign.biz/modx/uploader/3.4](http://code.divandesign.biz/modx/uploader/3.4)
 
 ## Описание 
 
@@ -40,7 +40,8 @@
 
 ## Screenshots
 
-![image](image.png)
+* ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen1.png)
+* ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen2.png)
 
 ## Changelog
 
