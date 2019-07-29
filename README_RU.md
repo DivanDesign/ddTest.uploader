@@ -30,7 +30,7 @@
 * Возврат значений по заданным шаблонам (чанкам) строк и столбцов (также в шаблонах строк доступны плейсхолдеры `[+rowNumber+]` и `[+rowNumber.zeroBased+]` с номером строки). Параметры `rowTpl` и `colTpl`.
 * Возврат результатов в чанке (параметр `outerTpl`). отправляющем дополнительные данные через плейсхолдеры (параметр `placeholders`)..
 
-## Uses
+## Использует
 
 * PHP >= 5.4.
 * MODXEvo >= 1.1.
@@ -38,12 +38,12 @@
 * MODXEvo.snippets.ddTypograph >= 1.4.3 (if typography is required).
 
 
-## Screenshots
+## Снимки экрана
 
 * ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen1.png)
 * ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen2.png)
 
-## Changelog
+## Список изменений
 
 + Добавлена поддержка массивов для плейсхолдеров.
 + Добавлена поддержка формата JSON для параметра плейсхолдеров.
@@ -52,7 +52,7 @@
 	* rowDelimiter → inputString_rowDelimiter.
 	* colDelimiter → inputString_colDelimiter.
 	
-## Documentation
+## Документация
 
 ###Installation
 
