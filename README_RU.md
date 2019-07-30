@@ -37,7 +37,6 @@
 * MODXEvo.libraries.ddTools >= 0.18.
 * MODXEvo.snippets.ddTypograph >= 1.4.3 (if typography is required).
 
-
 ## Снимки экрана
 
 * ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen1.png)
