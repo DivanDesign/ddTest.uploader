@@ -42,15 +42,6 @@
 * ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen1.png)
 * ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen2.png)
 
-## Список изменений
-
-+ Добавлена поддержка массивов для плейсхолдеров.
-+ Добавлена поддержка формата JSON для параметра плейсхолдеров.
-+ Добавлена поддержка формата JSON для параметра `inputString`.
-* Следующие параметры были переименованы (фрагмент работает со старыми именами, но они устарели):
-	* rowDelimiter → inputString_rowDelimiter.
-	* colDelimiter → inputString_colDelimiter.
-	
 ## Документация
 
 ###Installation
