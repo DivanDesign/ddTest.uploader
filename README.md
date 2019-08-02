@@ -45,7 +45,7 @@ Snippet for outputting data separated by defined delimiters. It is convenient to
 * ![image](http://code.divandesign.biz/images/modx/ddTest.Uploader/3_4/Screen2.png)
 
 ## Documentation
-###Installation
+### Installation
 Elements → Snippets: Create a new snippet with the following data:
 
 * Snippet name: `ddTest.Uploader`.
@@ -56,20 +56,25 @@ Elements → Snippets: Create a new snippet with the following data:
 
 ## Parameters description
 
+### Input parameters:
 * $inputString {stirng_json|string_separated} — The input string containing values in JSON (https://en.wikipedia.org/wiki/JSON) or separated by `$inputString_rowDelimiter` and `$inputString_colDelimiter`. @required
 * $inputString_docField {string} — The name of the document field/TV which value is required to get. If the parameter is passed then the input string will be taken from the field/TV and `inputString` will be ignored. Default: —.
 * $inputString_docId {integer} — ID of the document which field/TV value is required to get. `inputString_docId` equals the current document id since `inputString_docId` is unset. Default: —.
 * $inputString_rowDelimiter {string|regexp} — The input string row delimiter (if not `JSON`). Default: '||'.
 * $inputString_colDelimiter {string|regexp} — The input string column delimiter (if not `JSON`). Default: '::'.
-* $startRow {integer} — The index of the initial row (indexes start at 0). Default: 0.
-* $totalRows {integer|'all'} — The maximum number of rows to return. All rows will be returned if `totalRows` == 'all'. Default: 'all'.
-* $columns {string_commaSeparated|'all'} — The indexes of columns to return (indexes start at 0). All columns will be returned if `columns` == 'all'. Default: 'all'.
+
+### Data parameters:
 * $filter {string_separated} — Filter clause for columns. Thus, '0::a||0::b||1::1' makes the columns with either 'a' or 'b' in the 0 column and with 1 in the 1 column to be returned. Default: ''.
 * $removeEmptyRows {0|1} — Is it required to remove empty rows? Default: 1.
 * $removeEmptyCols {0|1} — Is it required to remove empty columns? Default: 1.
 * $sortBy {string_commaSeparated} — The index of the column to sort by (indexes start at 0). The parameter also takes comma-separated values for multiple sort, e.g. '0,1'. Default: '0'.
 * $sortDir {'ASC'|'DESC'|'RAND'|'REVERSE'|''} — Rows sorting direction. The rows will be returned in reversed order if `sortDir` == 'REVERSE'. Default: ''.
 * $typography {string_commaSeparated} — The comma separated indexes of the columns which values have to be corrected (indexes start at 0). If unset, there will be no correction. Default: —.
+
+### Output parameters:
+* $startRow {integer} — The index of the initial row (indexes start at 0). Default: 0.
+* $totalRows {integer|'all'} — The maximum number of rows to return. All rows will be returned if `totalRows` == 'all'. Default: 'all'.
+* $columns {string_commaSeparated|'all'} — The indexes of columns to return (indexes start at 0). All columns will be returned if `columns` == 'all'. Default: 'all'.
 * $outputFormat {'html'|'JSON'|'array'|'htmlarray'} — Result output format. Default: 'html'.
 * $rowGlue {string} — The string that combines rows while rendering. It can be used along with “rowTpl”. Default: ''.
 * $colGlue {string} — The string that combines columns while rendering. It can be used along with `colTpl`, but not with `rowTpl` for obvious reasons. Default: ''.
