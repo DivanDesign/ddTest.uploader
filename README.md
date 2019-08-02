@@ -56,14 +56,14 @@ Elements → Snippets: Create a new snippet with the following data:
 
 ## Parameters description
 
-### Input parameters:
+### Input parameters — Main snippet parameters
 * $inputString {stirng_json|string_separated} — The input string containing values in JSON (https://en.wikipedia.org/wiki/JSON) or separated by `$inputString_rowDelimiter` and `$inputString_colDelimiter`. @required
 * $inputString_docField {string} — The name of the document field/TV which value is required to get. If the parameter is passed then the input string will be taken from the field/TV and `inputString` will be ignored. Default: —.
 * $inputString_docId {integer} — ID of the document which field/TV value is required to get. `inputString_docId` equals the current document id since `inputString_docId` is unset. Default: —.
 * $inputString_rowDelimiter {string|regexp} — The input string row delimiter (if not `JSON`). Default: '||'.
 * $inputString_colDelimiter {string|regexp} — The input string column delimiter (if not `JSON`). Default: '::'.
 
-### Data parameters:
+### Data parameters — Some data manipulations 
 * $filter {string_separated} — Filter clause for columns. Thus, '0::a||0::b||1::1' makes the columns with either 'a' or 'b' in the 0 column and with 1 in the 1 column to be returned. Default: ''.
 * $removeEmptyRows {0|1} — Is it required to remove empty rows? Default: 1.
 * $removeEmptyCols {0|1} — Is it required to remove empty columns? Default: 1.
